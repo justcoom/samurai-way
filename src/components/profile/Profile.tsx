@@ -1,7 +1,9 @@
+import s from './profile.module.css'
+import {MyPosts} from "./myPosts/MyPosts.tsx";
 
 export const Profile = () => {
     return (
-        <div className={'content'}>
+        <div className={s.content}>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCZlf5lc5tX-0gY-y94pGS0mQdL-D0lCH2OQ&s"
                  alt=""/>
             <div>
@@ -10,18 +12,7 @@ export const Profile = () => {
                      alt=""/>
                 description
             </div>
-            <div>
-                My posts
-                <div>
-                    New post
-                </div>
-                <div>
-                    post 1
-                </div>
-                <div>
-                    post 2
-                </div>
-            </div>
+            <MyPosts/>
         </div>
     );
 };

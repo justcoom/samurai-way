@@ -10,22 +10,3 @@
             'header header '
             'nav content';
 }
-
-.header {
-    grid-area: header;
-    background-color: lightgreen;
-}
-
-.header img {
-    width: 40px;
-}
-
-.nav {
-    grid-area: nav;
-    background-color: lightblue;
-}
-
-.content {
-    grid-area: content;
-    background-color: lightpink;
-}
