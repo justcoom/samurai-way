@@ -1,7 +1,13 @@
 import styles from './myPosts.module.css'
-import {Post} from "./post/Post.tsx";
+import {PostType} from "../../../App.tsx";
+import {Post} from "./Post/Post.tsx";
 
-export const MyPosts = () => {
+type PropsType = {
+    posts: PostType[]
+}
+
+export const MyPosts = (props: PropsType) => {
+
     return (
         <div className={styles.myPostBlock}>
             <h3>My posts</h3>
@@ -10,8 +16,7 @@ export const MyPosts = () => {
                 <button>add post</button>
             </div>
             <div className={styles.posts}>
-                <Post message={'Hi, how are you'} likeCount={15}/>
-                <Post message={'It`s my first post'} likeCount={10}/>
+                {props.posts.map(p => <Post message={p.message} likeCount={p.likesCount} id={p.id}/>)}
             </div>
         </div>
     );

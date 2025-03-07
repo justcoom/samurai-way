@@ -1,12 +1,17 @@
 import s from './profile.module.css'
 import {MyPosts} from "./myPosts/MyPosts.tsx";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo.tsx";
+import {PostType} from "../../App.tsx";
 
-export const Profile = () => {
+type PropsType = {
+    posts: PostType[]
+}
+
+export const Profile = (props: PropsType) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
         </div>
     );
 };

@@ -4,6 +4,7 @@ type PostPropsType = {
     message: string
     src?: string
     likeCount: number
+    id: string
 }
 
 export const Post = (props: PostPropsType) => {
