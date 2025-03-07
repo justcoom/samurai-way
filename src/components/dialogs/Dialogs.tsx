@@ -4,21 +4,20 @@ import {Message} from "./Message/Message.tsx";
 import {DialogType, MessageType} from "../../App.tsx";
 
 type DialogPropsType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
+    state: {dialogs: DialogType[], messages: MessageType[]}
 }
 
-export const Dialogs = ({dialogs, messages}: DialogPropsType) => {
+export const Dialogs = ({state}: DialogPropsType) => {
 
 
     return (
         <div className={s.content}>
             <div className={s.dialogs}>
                 <div className={s.dialogsItems}>
-                    {dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>)}
+                    {state.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>)}
                 </div>
                 <div className={s.messages}>
-                    {messages.map(m => <Message message={m.message} id={m.id}/>)}
+                    {state.messages.map(m => <Message message={m.message} id={m.id}/>)}
                 </div>
             </div>
         </div>

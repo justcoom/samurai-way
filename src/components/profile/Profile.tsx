@@ -4,14 +4,14 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo.tsx";
 import {PostType} from "../../App.tsx";
 
 type PropsType = {
-    posts: PostType[]
+    state: {posts: PostType[]}
 }
 
 export const Profile = (props: PropsType) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.state.posts}/>
         </div>
     );
 };

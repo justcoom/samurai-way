@@ -5,10 +5,12 @@ import {Route, Routes} from "react-router-dom";
 import {Header} from "./components/Header/Header.tsx";
 import {NavBar} from "./components/Navbar/NavBar.tsx";
 
-type Props = {
-    posts: PostType[]
-    messages: MessageType[]
-    dialogs: DialogType[]
+
+type AppProps = {
+    state: {
+        messagePage: {dialogs: DialogType[], messages: MessageType[]},
+        profilePage: {posts: PostType[]}
+    }
 }
 
 export type PostType = {
@@ -27,15 +29,15 @@ export type DialogType = {
     id: string
 }
 
-function App({messages, dialogs, posts}: Props) {
+function App({state}: AppProps) {
     return (
         <div className={'app-wrapper'}>
             <Header/>
             <NavBar/>
             <div className={'app-wrapper-content'}>
                 <Routes>
-                    <Route path={'/profile'} element={<Profile posts={posts}/>}/>
-                    <Route path={'/dialogs/*'} element={<Dialogs messages={messages} dialogs={dialogs}/>}/>
+                    <Route path={'/profile'} element={<Profile state={state.profilePage}/>}/>
+                    <Route path={'/dialogs/*'} element={<Dialogs state={state.messagePage}/>}/>
                 </Routes>
             </div>
         </div>
