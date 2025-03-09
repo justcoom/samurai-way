@@ -1,5 +1,5 @@
-import {Sidebar} from "../../../App.tsx";
 import styles from './Friends.module.css'
+import {Sidebar} from "../../../redux/state.ts";
 
 type Props = {
     state: Sidebar[]

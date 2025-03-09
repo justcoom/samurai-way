@@ -4,47 +4,38 @@ import {Dialogs} from "./components/dialogs/Dialogs.tsx";
 import {Route, Routes} from "react-router-dom";
 import {Header} from "./components/Header/Header.tsx";
 import {NavBar} from "./components/Navbar/NavBar.tsx";
+import {RootStateType} from "./redux/state.ts";
 
-
-type AppProps = {
-    state: {
-        messagePage: {dialogs: DialogType[], messages: MessageType[]},
-        profilePage: {posts: PostType[]},
-        sidebar: Sidebar[]
-    }
+export type AppPropsType = {
+    state: RootStateType
+    addPost: () => void
+    updatePostText: (newPostText: string) => void
+    updateMessageText: (newMessageText: string) => void
+    addMessage: () => void
 }
 
-export type PostType = {
-    message: string
-    id: string
-    likesCount: number
-}
-
-export type MessageType = {
-    message: string
-    id: string
-}
-
-export type DialogType = {
-    name: string
-    id: string
-}
-
-export type Sidebar = {
-    avatar: string
-    name: string
-    id: string
-}
-
-function App({state}: AppProps) {
+function App({state, updatePostText, addPost, updateMessageText, addMessage}: AppPropsType) {
     return (
         <div className={'app-wrapper'}>
             <Header/>
             <NavBar state={state.sidebar}/>
             <div className={'app-wrapper-content'}>
                 <Routes>
-                    <Route path={'/profile'} element={<Profile state={state.profilePage}/>}/>
-                    <Route path={'/dialogs/*'} element={<Dialogs state={state.messagePage}/>}/>
+                    <Route path={'/profile'} element={
+                        <Profile
+                            addPost={addPost}
+                            state={state.profilePage}
+                            updatePostText={updatePostText}
+                        />
+                    }/>
+                    <Route path={'/dialogs/*'} element={
+                        <Dialogs
+                            state={state.messagePage}
+                            updateMessageText={updateMessageText}
+                            addMessage={addMessage}
+                            newMessageText={state.messagePage.newMessageText}
+                        />
+                    }/>
                 </Routes>
             </div>
         </div>

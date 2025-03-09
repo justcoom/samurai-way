@@ -1,7 +1,8 @@
 import s from './navBar.module.css'
 import {NavLink} from "react-router-dom";
 import {Friends} from "./Friends/Friends.tsx";
-import {Sidebar} from "../../App.tsx";
+
+import {Sidebar} from "../../redux/state.ts";
 
 type PropsType = {
     state: Sidebar[]
