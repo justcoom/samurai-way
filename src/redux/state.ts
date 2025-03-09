@@ -21,4 +21,10 @@ export const state = {
             {message: 'It`s my second post', id: "3", likesCount: 3},
         ],
     },
+    sidebar: [
+        {id: '1', avatar: 'https://i.pinimg.com/736x/4e/22/be/4e22beef6d94640c45a1b15f4a158b23.jpg', name: 'Andrew'},
+        {id: '2', avatar: 'https://i.pinimg.com/736x/d0/6b/43/d06b43ef4fc9ed6d78ac7a925923b303.jpg', name: 'Maksim'},
+        {id: '3', avatar: 'https://i.pinimg.com/736x/d3/fa/73/d3fa73954491aef4d06db87fc2099221.jpg', name: 'Sveta'},
+    ]
 }
+

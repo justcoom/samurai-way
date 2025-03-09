@@ -9,7 +9,8 @@ import {NavBar} from "./components/Navbar/NavBar.tsx";
 type AppProps = {
     state: {
         messagePage: {dialogs: DialogType[], messages: MessageType[]},
-        profilePage: {posts: PostType[]}
+        profilePage: {posts: PostType[]},
+        sidebar: Sidebar[]
     }
 }
 
@@ -29,11 +30,17 @@ export type DialogType = {
     id: string
 }
 
+export type Sidebar = {
+    avatar: string
+    name: string
+    id: string
+}
+
 function App({state}: AppProps) {
     return (
         <div className={'app-wrapper'}>
             <Header/>
-            <NavBar/>
+            <NavBar state={state.sidebar}/>
             <div className={'app-wrapper-content'}>
                 <Routes>
                     <Route path={'/profile'} element={<Profile state={state.profilePage}/>}/>

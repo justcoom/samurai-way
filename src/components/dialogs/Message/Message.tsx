@@ -1,4 +1,4 @@
-import s from "../dialogs.module.css";
+import styles from "./Message.module.css";
 
 type MessagePropsType = {
     message: string
@@ -6,5 +6,5 @@ type MessagePropsType = {
 }
 
 export const Message = (props: MessagePropsType) => {
-    return <div className={s.message}> {props.message} </div>
+    return <div className={styles.message}> {props.message} </div>
 }

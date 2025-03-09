@@ -1,0 +1,15 @@
+
+.dialog {
+    padding: 10px;
+    color: black;
+
+    & > a {
+        text-decoration: none;
+        color: black;
+    }
+}
+
+.dialog .active {
+    color: gold;
+    text-decoration: underline;
+}
