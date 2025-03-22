@@ -5,22 +5,23 @@ import {PostType} from "../../../redux/state.ts";
 
 type PropsType = {
     posts: PostType[]
-    addPost: () => void
+    // addPost: () => void
     newPostText: string
-    updatePostText: (newPostText: string) => void
+    // updatePostText: (newPostText: string) => void
+    dispatch: (action: {type: string, payload?: {newPostText: string, newMessageText: string}}) => void
 }
 
 export const MyPosts = (props: PropsType) => {
     const newPostElement = useRef<HTMLTextAreaElement>(null);
 
     const addPostHandler = () => {
-        props.addPost()
+        props.dispatch({type: 'posts/addPost'})
 
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
-            props.updatePostText(newPostElement.current.value)
+            props.dispatch({type: 'posts/updatePostText', payload: {newPostText: newPostElement.current.value}})
         }
     }
 
@@ -36,7 +37,7 @@ export const MyPosts = (props: PropsType) => {
                 <button onClick={addPostHandler}>Add post</button>
             </div>
             <div className={styles.posts}>
-                {props.posts.map(p => <Post message={p.message} likeCount={p.likesCount} id={p.id}/>)}
+                {props.posts.map(p => <Post key={p.id} message={p.message} likeCount={p.likesCount} id={p.id}/>)}
             </div>
         </div>
     );

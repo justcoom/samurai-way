@@ -8,13 +8,14 @@ import {RootStateType} from "./redux/state.ts";
 
 export type AppPropsType = {
     state: RootStateType
-    addPost: () => void
-    updatePostText: (newPostText: string) => void
-    updateMessageText: (newMessageText: string) => void
-    addMessage: () => void
+    // addPost: () => void
+    // updatePostText: (newPostText: string) => void
+    // updateMessageText: (newMessageText: string) => void
+    // addMessage: () => void
+    dispatch: (action: {type: string, payload?: {newPostText?: string, newMessageText?: string}}) => void
 }
 
-function App({state, updatePostText, addPost, updateMessageText, addMessage}: AppPropsType) {
+function App({state, dispatch}: AppPropsType) {
     return (
         <div className={'app-wrapper'}>
             <Header/>
@@ -23,17 +24,18 @@ function App({state, updatePostText, addPost, updateMessageText, addMessage}: Ap
                 <Routes>
                     <Route path={'/profile'} element={
                         <Profile
-                            addPost={addPost}
+                            // addPost={addPost}
                             state={state.profilePage}
-                            updatePostText={updatePostText}
+                            // updatePostText={updatePostText}
+                            dispatch={dispatch}
                         />
                     }/>
                     <Route path={'/dialogs/*'} element={
                         <Dialogs
                             state={state.messagePage}
-                            updateMessageText={updateMessageText}
-                            addMessage={addMessage}
-                            newMessageText={state.messagePage.newMessageText}
+                            // updateMessageText={updateMessageText}
+                            // addMessage={addMessage}
+                            dispatch={dispatch}
                         />
                     }/>
                 </Routes>

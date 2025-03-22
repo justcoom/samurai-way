@@ -6,22 +6,22 @@ import {MessagePageType} from "../../redux/state.ts";
 
 type DialogPropsType = {
     state: MessagePageType
-    updateMessageText: (newMessageText: string) => void
-    addMessage: () => void
-    newMessageText: string
+    // updateMessageText: (newMessageText: string) => void
+    // addMessage: () => void
+    dispatch: (action: {type: string, payload?: {newPostText?: string, newMessageText?: string}}) => void
 }
 
-export const Dialogs = ({state, updateMessageText, addMessage, newMessageText}: DialogPropsType) => {
+export const Dialogs = ({state, dispatch}: DialogPropsType) => {
 
     const newMessageItem = useRef<HTMLTextAreaElement>(null)
 
     const addMessageButton = () => {
-        addMessage()
+        dispatch({type: 'messages/addMessage'})
     }
 
     const addMessageOnChange = () => {
         if (newMessageItem.current) {
-            updateMessageText(newMessageItem.current.value)
+            dispatch({type: 'messages/updateMessageText', payload: {newMessageText: newMessageItem.current.value}})
         }
     }
 
@@ -35,7 +35,7 @@ export const Dialogs = ({state, updateMessageText, addMessage, newMessageText}: 
                     {state.messages.map(m => <Message message={m.message} id={m.id}/>)}
                     <textarea
                         ref={newMessageItem}
-                        value={newMessageText}
+                        value={state.newMessageText}
                         onChange={addMessageOnChange}
                     />
                     <button onClick={addMessageButton}>Send Message</button>
