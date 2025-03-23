@@ -1,27 +1,27 @@
 import styles from './myPosts.module.css'
 import {Post} from "./Post/Post.tsx";
 import {useRef} from "react";
-import {PostType} from "../../../redux/state.ts";
+import {addPostAC, PostType, updatePostTextAC} from "../../../redux/state.ts";
 
 type PropsType = {
     posts: PostType[]
     // addPost: () => void
     newPostText: string
     // updatePostText: (newPostText: string) => void
-    dispatch: (action: {type: string, payload?: {newPostText: string, newMessageText: string}}) => void
+    dispatch: (action: {type: string, payload?: {newPostText?: string, newMessageText?: string}}) => void
 }
 
 export const MyPosts = (props: PropsType) => {
     const newPostElement = useRef<HTMLTextAreaElement>(null);
 
     const addPostHandler = () => {
-        props.dispatch({type: 'posts/addPost'})
+        props.dispatch(addPostAC())
 
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
-            props.dispatch({type: 'posts/updatePostText', payload: {newPostText: newPostElement.current.value}})
+            props.dispatch(updatePostTextAC(newPostElement.current.value))
         }
     }
 

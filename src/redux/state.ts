@@ -1,3 +1,8 @@
+const addPost = 'posts/addPost';
+const updatePostText = 'posts/updatePostText'
+const addMessage = 'messages/addMessage';
+const updateMessageText = 'messages/updateMessageText'
+
 export type PostType = {
     message: string
     id: string
@@ -82,13 +87,13 @@ export const store = {
         this._callSubscriber = observer
     },
 
-    dispatch(action: {type: string, payload?: {newPostText?: string, newMessageText?: string}}) {
-        if (action.type === 'posts/addPost') {
+    dispatch(action: { type: string, payload?: { newPostText?: string, newMessageText?: string } }) {
+        if (action.type === addPost) {
             const newPost: PostType = {id: '5', message: this._state.profilePage.newPostText, likesCount: 0};
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'posts/updatePostText') {
+        } else if (action.type === updatePostText) {
             this._state.profilePage.newPostText = action.payload.newPostText
             this._callSubscriber(this._state)
         } else if (action.type === 'messages/addMessage') {
@@ -101,4 +106,18 @@ export const store = {
             this._callSubscriber(this._state)
         }
     },
+}
+
+export const addPostAC = () => {
+    return {type: addPost}
+}
+export const updatePostTextAC = (text: string) => {
+    return {type: updatePostText, payload: {newPostText: text}}
+}
+
+export const addMessageAC = () => {
+    return {type: addMessage}
+}
+export const updateMessageTextAC = (text: string) => {
+    return {type: updateMessageText, payload: {newMessageText: text}}
 }

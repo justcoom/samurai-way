@@ -2,7 +2,7 @@ import s from './dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem.tsx";
 import {Message} from "./Message/Message.tsx";
 import {useRef} from "react";
-import {MessagePageType} from "../../redux/state.ts";
+import {addMessageAC, MessagePageType, updateMessageTextAC} from "../../redux/state.ts";
 
 type DialogPropsType = {
     state: MessagePageType
@@ -16,12 +16,12 @@ export const Dialogs = ({state, dispatch}: DialogPropsType) => {
     const newMessageItem = useRef<HTMLTextAreaElement>(null)
 
     const addMessageButton = () => {
-        dispatch({type: 'messages/addMessage'})
+        dispatch(addMessageAC())
     }
 
     const addMessageOnChange = () => {
         if (newMessageItem.current) {
-            dispatch({type: 'messages/updateMessageText', payload: {newMessageText: newMessageItem.current.value}})
+            dispatch(updateMessageTextAC(newMessageItem.current.value))
         }
     }
 
