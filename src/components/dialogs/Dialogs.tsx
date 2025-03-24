@@ -2,13 +2,14 @@ import s from './dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem.tsx";
 import {Message} from "./Message/Message.tsx";
 import {useRef} from "react";
-import {addMessageAC, MessagePageType, updateMessageTextAC} from "../../redux/state.ts";
+import {MessagePageType} from "../../redux/state.ts";
+import {addMessageAC, DialogActionType, updateMessageTextAC} from "../../redux/dialogs-reducer.ts";
 
 type DialogPropsType = {
     state: MessagePageType
     // updateMessageText: (newMessageText: string) => void
     // addMessage: () => void
-    dispatch: (action: {type: string, payload?: {newPostText?: string, newMessageText?: string}}) => void
+    dispatch: (action: DialogActionType) => void
 }
 
 export const Dialogs = ({state, dispatch}: DialogPropsType) => {

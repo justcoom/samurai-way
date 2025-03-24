@@ -1,9 +1,10 @@
 import './index.css'
-import {RootStateType, store} from "./redux/state.ts";
+import {RootStateType} from "./redux/state.ts";
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import App from './App.tsx'
 import {BrowserRouter} from "react-router-dom";
+import {store} from "./redux/redux-store.ts";
 
 const root = createRoot(document.getElementById('root')!)
 
@@ -14,9 +15,7 @@ const rerenderEntireThree = (state: RootStateType) => {
                 <App
                     dispatch={store.dispatch.bind(store)}
                     state={state}
-                    // updatePostText={store.updatePostText.bind(store)}
-                    // updateMessageText={store.updateMessageText.bind(store)}
-                    // addMessage={store.addMessage.bind(store)}
+                    store={store}
                 />
             </BrowserRouter>
         </StrictMode>,
@@ -26,4 +25,6 @@ const rerenderEntireThree = (state: RootStateType) => {
 
 rerenderEntireThree(store.getState())
 
-store.subscribe(rerenderEntireThree)
+store.subscribe(() => {
+    rerenderEntireThree(store.getState())
+})

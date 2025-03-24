@@ -3,12 +3,11 @@ import {MyPosts} from "./myPosts/MyPosts.tsx";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo.tsx";
 
 import {ProfilePageType} from "../../redux/state.ts";
+import {ProfileActionType} from "../../redux/profile-reducer.ts";
 
 type PropsType = {
     state: ProfilePageType
-    // addPost: () => void
-    // updatePostText: (newPostText: string) => void
-    dispatch: (action: {type: string, payload?: {newPostText: string, newMessageText: string}}) => void
+    dispatch: (action: ProfileActionType) => void
 }
 
 export const Profile = (props: PropsType) => {

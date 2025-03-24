@@ -1,7 +1,5 @@
-const addPost = 'posts/addPost';
-const updatePostText = 'posts/updatePostText'
-const addMessage = 'messages/addMessage';
-const updateMessageText = 'messages/updateMessageText'
+import {AddPostActionType, profileReducer, UpdatePostTextActionType} from "./profile-reducer.ts";
+import {AddMessageActionType, dialogReducer, UpdateMessageActionType} from "./dialogs-reducer.ts";
 
 export type PostType = {
     message: string
@@ -76,7 +74,11 @@ export const store = {
                 avatar: 'https://i.pinimg.com/736x/d0/6b/43/d06b43ef4fc9ed6d78ac7a925923b303.jpg',
                 name: 'Maksim'
             },
-            {id: '3', avatar: 'https://i.pinimg.com/736x/d3/fa/73/d3fa73954491aef4d06db87fc2099221.jpg', name: 'Sveta'},
+            {
+                id: '3',
+                avatar: 'https://i.pinimg.com/736x/d3/fa/73/d3fa73954491aef4d06db87fc2099221.jpg',
+                name: 'Sveta'
+            },
         ]
     },
 
@@ -87,37 +89,12 @@ export const store = {
         this._callSubscriber = observer
     },
 
-    dispatch(action: { type: string, payload?: { newPostText?: string, newMessageText?: string } }) {
-        if (action.type === addPost) {
-            const newPost: PostType = {id: '5', message: this._state.profilePage.newPostText, likesCount: 0};
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state)
-        } else if (action.type === updatePostText) {
-            this._state.profilePage.newPostText = action.payload.newPostText
-            this._callSubscriber(this._state)
-        } else if (action.type === 'messages/addMessage') {
-            const newMessage: MessageType = {message: this._state.messagePage.newMessageText, id: '5'}
-            this._state.messagePage.messages.push(newMessage)
-            this._state.messagePage.newMessageText = ''
-            this._callSubscriber(this._state)
-        } else if (action.type === 'messages/updateMessageText') {
-            this._state.messagePage.newMessageText = action.payload.newMessageText
-            this._callSubscriber(this._state)
-        }
+    dispatch(action: UpdatePostTextActionType | AddPostActionType | AddMessageActionType | UpdateMessageActionType) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagePage = dialogReducer(this._state.messagePage, action)
+        this._callSubscriber(this._state)
     },
 }
 
-export const addPostAC = () => {
-    return {type: addPost}
-}
-export const updatePostTextAC = (text: string) => {
-    return {type: updatePostText, payload: {newPostText: text}}
-}
 
-export const addMessageAC = () => {
-    return {type: addMessage}
-}
-export const updateMessageTextAC = (text: string) => {
-    return {type: updateMessageText, payload: {newMessageText: text}}
-}
+

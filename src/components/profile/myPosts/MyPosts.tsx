@@ -1,14 +1,15 @@
 import styles from './myPosts.module.css'
 import {Post} from "./Post/Post.tsx";
 import {useRef} from "react";
-import {addPostAC, PostType, updatePostTextAC} from "../../../redux/state.ts";
+import {PostType} from "../../../redux/state.ts";
+import {addPostAC, ProfileActionType, updatePostTextAC} from "../../../redux/profile-reducer.ts";
 
 type PropsType = {
     posts: PostType[]
     // addPost: () => void
     newPostText: string
     // updatePostText: (newPostText: string) => void
-    dispatch: (action: {type: string, payload?: {newPostText?: string, newMessageText?: string}}) => void
+    dispatch: (action: ProfileActionType) => void
 }
 
 export const MyPosts = (props: PropsType) => {
